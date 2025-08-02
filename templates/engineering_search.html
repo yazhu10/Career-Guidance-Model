@@ -1,0 +1,45 @@
+{% include 'user_header.html' %}
+{% load static %}
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="padding-top: 50px;">
+    <div class="card">
+        <h5 class="card-header">Predict College and Course Based on Skill </h5>
+        <div class="card-body">
+            {% if messages %}
+                {% for i in messages %}
+                    <div class="alert alert-success">{{i}}</div>
+                {% endfor %}
+            {% endif %}
+         
+            <form  id="basicform" method="post" enctype="multipart/form-data">{% csrf_token %}
+              
+                    <select name="degree" class="form-control" style="width:250px;float: left;margin-right: 50px;">
+                        <option value="">Select Skill</option>
+                        {% for i in row %}
+                            <option value="{{i.0}}">{{i.0}}</option>
+                        {% endfor %}
+                    </select>
+                    
+
+               <input id="inputUserName" type="text" name="cutoff_mark" required="required"  class="form-control" placeholder="Enter Cuttoff Mark" style="width:250px;float: left;margin-right: 50px;"><div style="clear:both;"></div><br>
+                <button type="submit" class="btn btn-space btn-success">PREDICT ENGNEERING COLLEGE   </button>
+               
+            </form>
+            <br><Br>
+            {% if a %}
+           <h3>Recommended Colleges and Course based on SKills </h3>
+            {% for i in a %}
+                <h3 style="font-size:20px;padding:20px 0;">{{i.college_name}}</h3>
+                
+                
+                <div  style="float:left;width:40%;margin-left: 50px;">
+                    <h4 style="font-size:15px;padding-bottom: 10px;">Degree: {{i.degree}}</h4>
+                    <h4 style="font-size:15px;padding-bottom: 10px;">Department : {{i.department}}</h4>
+                    <h4 style="font-size:15px;padding-bottom: 10px;">Skill : {{i.skill}}</h4>
+               
+                   
+                </div><div style="clear:both;"></div>
+                {% endfor %}
+                {% endif %}
+        </div>
+    </div>
+</div>
